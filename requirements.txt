@@ -1,0 +1,6 @@
+cfscrape
+BeautifulSoup4
+pyyaml
+lxml
+tqdm
+pillow
