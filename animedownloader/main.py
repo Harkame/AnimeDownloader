@@ -15,7 +15,7 @@ def main(arguments):
     scraper = cfscrape.create_scraper()
 
     for manga in settings.mangas:
-        download_manga(scraper, manga)
+        download_anime(scraper, manga)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
