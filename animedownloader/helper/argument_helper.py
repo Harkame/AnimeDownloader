@@ -20,33 +20,15 @@ def get_arguments(arguments):
     )
 
     argument_parser.add_argument(
-        '-f', '--format',
-        help = 'Set format of downloaded mangas' + os.linesep + 'Example : python japscandownloader/main.py -f cbz|pdf|jpg|png',
-        type = str,
-    )
-
-    argument_parser.add_argument(
         '-v', '--verbose',
         help = 'Active verbose mode, support different level' + os.linesep + 'Example : python japscandownloader/main.py -vv',
         action = 'count',
     )
 
     argument_parser.add_argument(
-        '-r', '--reverse',
-        help = 'Reverse chapters download order' + os.linesep + 'Default : Last to first' + os.linesep + 'Example : python japscandownloader/main.py -r',
-        action = 'count',
-    )
-
-    argument_parser.add_argument(
-        '-k', '--keep',
-        help = 'Keep downloaded images (when format is pdf/cbz)' + os.linesep + 'Default : false' + os.linesep + 'Example : python japscandownloader/main.py -k',
-        action = 'count',
-    )
-
-    argument_parser.add_argument(
-        '-u', '--unscramble',
-        help = 'Force unscrambling' + os.linesep + 'Example : python japscandownloader/main.py -u',
-        action = 'count',
+        '-C', '--chrome',
+        help = 'Use chrome (Default : firefox)' + os.linesep + 'Example : python japscandownloader/main.py -C',
+        action = str,
     )
 
     return argument_parser.parse_args(arguments)

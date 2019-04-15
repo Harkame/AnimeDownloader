@@ -12,10 +12,10 @@ import os
 def main(arguments):
     settings.init(arguments)
 
-    scraper = cfscrape.create_scraper()
+    browser = webdriver.Firefox()
 
     for manga in settings.mangas:
-        download_anime(scraper, manga)
+        download_anime(browser, manga)
 
 if __name__ == '__main__':
     main(sys.argv[1:])

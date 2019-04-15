@@ -12,10 +12,9 @@ DEFAULT_MANGA_FORMAT = 'jpg'
 logger = logging.getLogger()
 config_file = None
 destination_path = None
-keep = False
-manga_format = None
-reverse = False
-unscramble = False
+
+browser = None
+
 mangas = []
 
 def init(arguments):
@@ -23,12 +22,10 @@ def init(arguments):
 
     global config_file
     global destination_path
-    global keep
-    global manga_format
-    global unscramble
-    global reverse
 
     global mangas
+
+    global browser
 
     config_file = DEFAULT_CONFIG_FILE
 
@@ -36,26 +33,15 @@ def init(arguments):
 
     init_config()
 
-    logger.debug('config_file : %s', config_file)
-    logger.debug('destination_path : %s', destination_path)
-    logger.debug('keep : %s', keep)
-    logger.debug('manga_format : %s', manga_format)
-    logger.debug('unscramble : %s', unscramble)
-    logger.debug('reverse : %s', reverse)
-
-    logger.debug('mangas : %s', mangas)
-
 def init_arguments(arguments):
     global logger
 
     global config_file
     global destination_path
-    global keep
-    global manga_format
-    global reverse
-    global unscramble
 
     global mangas
+
+    global browser
 
     arguments = get_arguments(arguments)
 
@@ -86,43 +72,29 @@ def init_arguments(arguments):
     if arguments.destination_path:
         destination_path = arguments.destination_path
 
-    if arguments.format:
-        manga_format = arguments.format
-
-    if arguments.reverse:
-        reverse = True
-
-    if arguments.keep:
-        keep = True
-
-    if arguments.keep:
-        unscramble = True
+    if arguments.chrome:
+        chrome_opt=webdriver.ChromeOptions()
+        chrome_opt.add_argument('--headless')
+        browser=webdriver.Chrome(chrome_options=chrome_opt)
+    else:
+        fox_opt=webdriver.FirefoxOptions()
+        fox_opt.add_argument('--headless')
+        browser=webdriver.Firefox(firefox_options=fox_opt)
 
 def init_config():
     global logger
 
-    global config_file
     global destination_path
-    global keep
-    global manga_format
-    global reverse
-    global unscramble
 
-    global mangas
+    global animes
 
     config = get_config(config_file)
 
-    if config['mangas'] is not None:
-        mangas.extend(config['mangas'])
+    if config['animes'] is not None:
+        mangas.extend(config['animes'])
 
     if destination_path is None:
         if config['destination_path'] is not None:
             destination_path = config['destination_path']
         else:
             destination_path = DEFAULT_DESTINATION_PATH
-
-    if manga_format is None:
-        if config['manga_format'] is not None:
-            manga_format = config['manga_format']
-        else:
-            manga_format = DEFAULT_MANGA_FORMAT
