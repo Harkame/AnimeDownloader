@@ -14,6 +14,6 @@ def extract_video_source(browser, url):
 
     video_tag = browser.find_element_by_id('olvideo_html5_api')
 
-    video_source = video.get_attribute('src')
+    video_source = video_tag.get_attribute('src')
 
     return video_source

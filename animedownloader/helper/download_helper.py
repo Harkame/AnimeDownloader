@@ -5,11 +5,15 @@ import os
 from tqdm import tqdm
 import sys
 
+import time
+
 from urllib.parse import urlparse
 
 JETANIME_URL = 'https://www.jetanime.co'
 
 import requests
+
+from helper.openload_helper import extract_video_source
 
 def download_anime(browser, anime):
     session = requests.Session()
@@ -23,9 +27,20 @@ def download_anime(browser, anime):
     for episode in episodes:
         reference = JETANIME_URL + episode['href']
 
+        print(reference)
+
         browser.get(reference)
 
-        video_tag = browser.find_elements_by_css_selector('iframe')[0].get_attribute('href')
+        time.sleep(1)
 
-        print(video_tag)
-        print('toto')
+        anime_page = BeautifulSoup(browser.page_source, features='lxml')
+
+        player = anime_page.find('iframe')
+
+        src = player['src']
+
+        print(src)
+
+        video_stream = extract_video_source(browser, src)
+
+        print(video_stream)
