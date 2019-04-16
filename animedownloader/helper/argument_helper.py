@@ -28,7 +28,7 @@ def get_arguments(arguments):
     argument_parser.add_argument(
         '-C', '--chrome',
         help = 'Use chrome (Default : firefox)' + os.linesep + 'Example : python japscandownloader/main.py -C',
-        action = str,
+        type = str,
     )
 
     return argument_parser.parse_args(arguments)

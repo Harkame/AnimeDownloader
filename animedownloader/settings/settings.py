@@ -1,6 +1,8 @@
 from helper.argument_helper import get_arguments
 from helper.config_helper import get_config
 
+from selenium import webdriver
+
 import logging
 import os
 import sys
@@ -15,7 +17,7 @@ destination_path = None
 
 browser = None
 
-mangas = []
+animes = []
 
 def init(arguments):
     global logger
@@ -23,7 +25,7 @@ def init(arguments):
     global config_file
     global destination_path
 
-    global mangas
+    global animes
 
     global browser
 
@@ -90,10 +92,10 @@ def init_config():
 
     config = get_config(config_file)
 
-    if config['animes'] is not None:
-        mangas.extend(config['animes'])
+    if 'animes' in config:
+        animes.extend(config['animes'])
 
-    if destination_path is None:
+    if 'destination_path' in config:
         if config['destination_path'] is not None:
             destination_path = config['destination_path']
         else:
