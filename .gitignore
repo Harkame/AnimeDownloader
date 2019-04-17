@@ -12,3 +12,4 @@ test_chapter/*
 build/
 dist/
 *.pyc
+geckodriver.log

@@ -17,5 +17,8 @@ def main(arguments):
     for anime in settings.animes:
         download_anime(browser, anime)
 
+
+    browser.dispose()
+
 if __name__ == '__main__':
     main(sys.argv[1:])
